@@ -1,0 +1,29 @@
+{
+  "name": "namste-react",
+  "version": "1.0.0",
+  "description": "this is a react application",
+  "keywords": [
+    "reacts"
+  ],
+  "homepage": "https://github.com/Rohitsaini0444/namste-react#readme",
+  "bugs": {
+    "url": "https://github.com/Rohitsaini0444/namste-react/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rohitsaini0444/namste-react.git"
+  },
+  "license": "ISC",
+  "author": "rohit saini",
+  "type": "commonjs",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.1"
+  },
+  "dependencies": {
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1"
+  }
+}
