@@ -1,25 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-const element = <h1>This is React Element</h1>;
-const HeaderComponent = () => {
-    return (
-        <div className="header">
-            <div className="logo-container">
-                <img src="https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png" alt="logo" className="logo" />
-            </div>
-            <div className="nav-items">
-                <ul>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact</li>
-                    <li>Cart</li>
-                </ul>
-            </div>
-        </div>
-    );
-}
-
-const restaurantList =   [
+export const restaurantList =   [
     {
       "card": {
         "card": {
@@ -1417,47 +1396,3 @@ const restaurantList =   [
       }
     }
   ]
-
-const RestaurantCard = (props) => {
-    const { cloudinaryImageId, name, avgRating, cuisines, sla } = props?.resData?.info;
-
-    console.log(props?.resData);
-    return (
-        <div className="restaurant-card">
-            <img className="restaurant-logo" src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`} alt="restaurant-logo" />
-            <div className="name">{name}</div>
-            <div className="star rating" >{avgRating}⭐</div>
-            <div className="cuisine">{cuisines?.join(", ")}</div>
-            <div className="delivery-time">{sla?.deliveryTime} mins</div>
-        </div>
-    );
-}
-
-const BodyComponent = () => {
-    return (
-        <div className="restaurant-container">
-            <div className="search-container">
-                <input type="text" className="search-box" />
-                <button className="search-btn">Search</button>
-            </div>
-            <div className="restaurant-container">
-                {restaurantList.map((restaurant) => {
-                    if(restaurant?.card?.card?.info){
-                       return <RestaurantCard key={restaurant.card.card.info?.id} resData={restaurant.card.card} />
-                    }
-                })}
-            </div>
-        </div>
-    );
-}
-
-const AppLayout = () => {
-    return (
-        <div className="app">
-            <HeaderComponent />
-            <BodyComponent />
-        </div>
-    );
-}
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
