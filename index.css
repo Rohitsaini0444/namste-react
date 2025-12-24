@@ -50,8 +50,16 @@
 }
 
 .search-container {
-    margin: 20px;
     text-align: center;
+}
+
+.filter-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .restaurant-logo {
