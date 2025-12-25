@@ -1,9 +1,25 @@
-import { restaurantList } from "../../utils/mockData";
 import RestaurantCard from "./RestaurantCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
 
 const BodyComponent = () => {
-    const [restaurants, setRestaurants] = useState(restaurantList);
+    const [restaurants, setRestaurants] = useState([]);
+
+    useEffect( () => {
+         fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9966135&lng=77.5920581&collection=80471&tags=layout_BAU_Contextual%2Cpancake&sortBy=&filters=&type=rcv2&offset=0&page_type=null");
+        const json = await data.json();
+        console.log(json);
+        setRestaurants(json?.data?.cards);
+    }
+
+    if (restaurants.length === 0) {
+        return <Shimmer />;
+    }
+
     return (
         <div className="restaurant-container">
             <div className="filter-area">
@@ -12,16 +28,18 @@ const BodyComponent = () => {
                     <button className="search-btn">Search</button>
                 </div>
                 <div className="filter-container">
-                    <button className="filter-btn" onClick={()=>{
-                        console.log("Clicked", restaurantList);
-                        const filteredRestaurants = restaurantList.filter((res)=> res.card.card.info.avgRating>4.5);
+                    <button className="filter-btn" onClick={() => {
+                        const filteredRestaurants = restaurants.filter((res) => res?.card?.card?.info?.avgRating > 4.5);
                         setRestaurants(filteredRestaurants);
                     }}>Top Rated Restaurants</button>
                 </div>
             </div>
             <div className="restaurant-container">
                 {restaurants.map((restaurant) => {
+                    if (restaurant?.card?.card?.info) {
+                        console.log("CARD",restaurant?.card?.card);
                         return <RestaurantCard key={restaurant?.card?.card?.info?.id} resData={restaurant?.card?.card} />
+                    }
                 })}
             </div>
         </div>
