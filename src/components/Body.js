@@ -4,6 +4,8 @@ import Shimmer from "./Shimmer";
 
 const BodyComponent = () => {
     const [restaurants, setRestaurants] = useState([]);
+    const [searchText, setSearchText] = useState("");
+    const [filteredRestaurants, setFilteredRestaurants] = useState([]); 
 
     useEffect( () => {
          fetchData();
@@ -14,6 +16,7 @@ const BodyComponent = () => {
         const json = await data.json();
         console.log(json);
         setRestaurants(json?.data?.cards);
+        setFilteredRestaurants(json?.data?.cards);
     }
 
     if (restaurants.length === 0) {
@@ -24,8 +27,13 @@ const BodyComponent = () => {
         <div className="restaurant-container">
             <div className="filter-area">
                 <div className="search-container">
-                    <input type="text" className="search-box" />
-                    <button className="search-btn">Search</button>
+                    <input type="text" className="search-box" value={searchText} onChange={(e)=>{
+                        setSearchText(e.target.value);
+                    }}/>
+                    <button className="search-btn" onClick={()=>{
+                        const filteredRestaurants = restaurants.filter((res) => res?.card?.card?.info?.name?.toLowerCase().includes(searchText.toLowerCase()));
+                        setFilteredRestaurants(filteredRestaurants);
+                    }}>Search</button>
                 </div>
                 <div className="filter-container">
                     <button className="filter-btn" onClick={() => {
@@ -35,7 +43,7 @@ const BodyComponent = () => {
                 </div>
             </div>
             <div className="restaurant-container">
-                {restaurants.map((restaurant) => {
+                {filteredRestaurants.map((restaurant) => {
                     if (restaurant?.card?.card?.info) {
                         console.log("CARD",restaurant?.card?.card);
                         return <RestaurantCard key={restaurant?.card?.card?.info?.id} resData={restaurant?.card?.card} />
