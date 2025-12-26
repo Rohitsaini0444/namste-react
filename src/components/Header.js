@@ -10,10 +10,10 @@ const HeaderComponent = () => {
             </div>
             <div className="nav-items">
                 <ul>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact</li>
-                    <li>Cart</li>
+                    <li key="home"><a href="/">Home</a></li>
+                    <li key="about"><a href="/about">About</a></li>
+                    <li key="contact"><a href="/contact">Contact</a></li>
+                    <li key="cart"><a href="/cart">Cart</a></li>
                 </ul>
                 <button className="login-btn" onClick={() => setLogin(loginButton === 'Login' ? 'Logout' : 'Login')}>{loginButton}</button>
             </div>
