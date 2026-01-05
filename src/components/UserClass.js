@@ -30,7 +30,8 @@ export default class User extends React.Component {
     }
     componentDidUpdate() {
         //  Uncomment below line to see how componentDidUpdate works
-         alert("Component Did Update - " + this.state.count);
+        //  alert("Component Did Update - " + this.state.count);
+        console.log("Component Did Update");
     }
     componentWillUnmount() {
         console.log("Component Will Unmount");
