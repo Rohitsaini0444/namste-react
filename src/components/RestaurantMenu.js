@@ -1,35 +1,18 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { MENU_API_URL } from "../../utils/constants";
+import useResMenu from "../../utils/useResMenu";
+import Shimmer from "./Shimmer";
 
 const RestaurantMenu = () => {
     const { resId } = useParams();
-    const [restaurantMenu, setRestaurantMenu] = useState(null);
-
-    const fetchMenu = async () => {
-            // Use CORS proxy to bypass CORS restrictions (browser blocks cross-origin requests)
-            const corsProxyUrl = "http://localhost:8000/proxy?url=";
-            const apiUrl = `${MENU_API_URL}${resId}`;
-            // const fullUrl = corsProxyUrl + apiUrl;
-            const fullUrl = `https://namastedev.com/api/v1/listRestaurantMenu/${resId}`;
-
-            const data = await fetch(fullUrl);
-            const json = await data.json();
-            console.log("Menu data:", json);
-            setRestaurantMenu(json);
-    }
-
-    useEffect(() => {
-        fetchMenu();
-    }, [resId]);
-
+    const restaurantMenu = useResMenu(resId);
+    
     if (!restaurantMenu) {
-        return <h2>Loading Menu...</h2>;
+        return <Shimmer />;
     }
     const name = restaurantMenu?.data?.cards[2]?.card?.card?.info?.name;
     const menuList = restaurantMenu?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards;
     return (
-        <div>   
+        <div>
             <h1>Restaurant Menu</h1>
             <h2>{name}</h2>
             <ul>
@@ -41,5 +24,5 @@ const RestaurantMenu = () => {
             </ul>
         </div>
     );
-}   
+}
 export default RestaurantMenu;
