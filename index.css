@@ -1,4 +1,4 @@
-.header {
+/* .header {
     display: flex;
     justify-content: space-between;
     border: 1px solid black;
@@ -109,4 +109,7 @@
 .profile-img {
     border-radius: 50%;
     margin-bottom: 16px;
-}
+} */
+
+
+@import "tailwindcss";

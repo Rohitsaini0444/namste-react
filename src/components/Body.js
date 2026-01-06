@@ -28,7 +28,7 @@ const BodyComponent = () => {
 
     const isOnline = useOnlineStatus();
 
-    if(!isOnline){
+    if (!isOnline) {
         return <h1>🔴 You are offline! Please check your internet connection.</h1>
     }
 
@@ -38,25 +38,21 @@ const BodyComponent = () => {
 
     return (
         <div className="restaurant-container">
-            <div className="filter-area">
-                <div className="search-container">
-                    <input type="text" className="search-box" value={searchText} onChange={(e) => {
-                        setSearchText(e.target.value);
-                    }} />
-                    <button className="search-btn" onClick={() => {
-                        const filteredRestaurants = restaurants.filter((res) => res?.info?.name?.toLowerCase().includes(searchText.toLowerCase()));
-                        setFilteredRestaurants(filteredRestaurants);
-                    }}>Search</button>
-                </div>
-                <div className="filter-container">
-                    <button className="filter-btn" onClick={() => {
-                        const filteredRestaurants = restaurants.filter((res) => res?.info?.avgRating > 4.5);
-                       console.log("Filtered Restaurants by top rating:", filteredRestaurants); 
-                        setFilteredRestaurants(filteredRestaurants);
-                    }}>Top Rated Restaurants</button>
-                </div>
+            <div className="width-full flex justify-center items-center">
+                <input type="text" className="border border-gray-300 rounded-lg p-2" value={searchText} onChange={(e) => {
+                    setSearchText(e.target.value);
+                }} />
+                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-2" onClick={() => {
+                    const filteredRestaurants = restaurants.filter((res) => res?.info?.name?.toLowerCase().includes(searchText.toLowerCase()));
+                    setFilteredRestaurants(filteredRestaurants);
+                }}>Search</button>
+                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-8" onClick={() => {
+                    const filteredRestaurants = restaurants.filter((res) => res?.info?.avgRating > 4.5);
+                    console.log("Filtered Restaurants by top rating:", filteredRestaurants);
+                    setFilteredRestaurants(filteredRestaurants);
+                }}>Top Rated Restaurants</button>
             </div>
-            <div className="restaurant-container">
+            <div className="flex flex-wrap justify-center">
                 {filteredRestaurants.map((restaurant) => {
                     if (restaurant?.info) {
                         return <Link to={`/restaurant/${restaurant?.info?.id}`} key={restaurant?.info?.id}><RestaurantCard key={restaurant?.info?.id} resData={restaurant} /></Link>
