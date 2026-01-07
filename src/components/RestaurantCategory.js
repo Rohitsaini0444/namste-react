@@ -1,13 +1,15 @@
 import ListItem from "./listItem";
-import { useState } from "react";
+
 const RestaurantCategory = (props) => {
-    const { title, itemCards } = props.category;
-    const [isOpen, setIsOpen] = useState(true);
+    const { category, index, setShowIndex, showIndex } = props;
+    const { title, itemCards } = category;
+    const isOpen = showIndex === index;
+
     return (
         <div className="w-full my-4 p-4">
             <div className="flex flex-row w-1/2 justify-between">
                 <div><h2 className="font-bold">{title} ({itemCards?.length})</h2></div>
-                <button className="text-gray-600 font-bold" onClick={() => setIsOpen(!isOpen)}>{isOpen ? "▲" : "▼"}</button>
+                <button className="text-gray-600 font-bold" onClick={() => isOpen ? setShowIndex(null) : setShowIndex(index)}>{isOpen ? "▲" : "▼"}</button>
             </div>
             {isOpen && <div className="w-full m-4">
                 <ul>
