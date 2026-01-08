@@ -31,8 +31,8 @@ const AppLayout = () => {
     <div className="app">
       <UserContext.Provider value={userDetails} updateUser={setLoggedInUser}>
         <HeaderComponent />
+        <Outlet />
       </UserContext.Provider>
-      <Outlet />
     </div>
   );
 }
