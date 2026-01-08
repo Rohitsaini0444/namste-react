@@ -7,7 +7,7 @@ import UserContext from "../../utils/userContext";
 const HeaderComponent = () => {
     const [loginButton, setLogin] = useState('Login');
     const onlineStatus = useOnlineStatus() ? "🟢 Online" : "🔴 Offline";
-    const { name } = useContext(UserContext);
+    const { loggedInUser } = useContext(UserContext);
     return (
         <div className="flex justify-between bg-pink-50 shadow-lg ">
             <div className="w-28">
@@ -23,7 +23,7 @@ const HeaderComponent = () => {
                     <li key="cart"><Link to="/cart">Cart</Link></li>
                 </ul>
                 <button className="login-btn" onClick={() => setLogin(loginButton === 'Login' ? 'Logout' : 'Login')}>{loginButton}</button>
-                <div className="font-bold p-2">{name}</div>
+                <div className="font-bold p-2">{loggedInUser}</div>
             </div>
         </div>
     );

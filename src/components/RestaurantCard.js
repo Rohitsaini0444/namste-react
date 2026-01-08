@@ -1,7 +1,10 @@
 import { CDN_URL } from "../../utils/constants";
+import { useContext } from "react";
+import UserContext from "../../utils/userContext";
 
 const RestaurantCard = (props) => {
     const { cloudinaryImageId, name, avgRating, cuisines, sla, id } = props?.resData?.info;
+    const { loggedInUser } = useContext(UserContext);
     return (
         <div className="flex flex-col p-4 m-4 bg-white rounded-lg shadow-md" key={id}>
             <img className="w-60 h-60 rounded-lg" src={`${CDN_URL}${cloudinaryImageId}`} alt="restaurant-logo" />
@@ -9,13 +12,14 @@ const RestaurantCard = (props) => {
             <div className="ml-2" >{avgRating}⭐</div>
             <div className="ml-2">{cuisines?.join(", ")}</div>
             <div className="ml-2">{sla?.deliveryTime} mins</div>
+            <div className="ml-2 font-bold">loggedInUser: {loggedInUser}</div>
         </div>
     );
 }
 // Higher Order Component to add "Promoted" label
 // to promoted restaurants
 
-export const withPromotedLabel = (RestaurantCard) =>{
+export const withPromotedLabel = (RestaurantCard) => {
     return (props) => {
         return (
             <div>

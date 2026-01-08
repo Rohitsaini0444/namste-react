@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "../../utils/userContext";
 
 export default class User extends React.Component {
     constructor(props) {
@@ -38,7 +39,8 @@ export default class User extends React.Component {
     }
     render() {
         return (<div>
-            <button onClick={() => this.setState({ count: this.state.count + 1 })}>Increment Count {this.state.count}</button>
+            {/* <button onClick={() => this.setState({ count: this.state.count + 1 })}>Increment Count {this.state.count}</button> */}
+            <div> loggedInUser: <UserContext.Consumer>{(context) => context.loggedInUser}</UserContext.Consumer></div>
             <img src={this.state.userInfo.avatar_url} alt="User Avatar" width="100" className="profile-img"/>
             <h2>Name : {this.state.userInfo.name}</h2>
             <h3>Location : {this.state.userInfo.location}</h3>
