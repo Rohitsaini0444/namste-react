@@ -10,6 +10,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Cart from "./components/Cart";
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import appStore from "../utils/store/appStore";
 import UserContext from "../utils/userContext";
 
 const Grocery = lazy(() => import("./components/Grocery"));
