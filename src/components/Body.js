@@ -1,8 +1,9 @@
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../../utils/useOnlineStatus";
+import UserContext from "../../utils/userContext";
 
 const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
@@ -10,6 +11,7 @@ const BodyComponent = () => {
     const [restaurants, setRestaurants] = useState([]);
     const [searchText, setSearchText] = useState("");
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+    const {loggedInUser, updateUser} = useContext(UserContext);
 
     useEffect(() => {
         fetchData();
@@ -53,6 +55,9 @@ const BodyComponent = () => {
                     console.log("Filtered Restaurants by top rating:", filteredRestaurants);
                     setFilteredRestaurants(filteredRestaurants);
                 }}>Top Rated Restaurants</button>
+                <input type="text" value={loggedInUser} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2" onChange={(e) => {
+                    updateUser(e.target.value)
+                }} />
             </div>
             <div className="flex flex-wrap justify-center">
                 {filteredRestaurants.map((restaurant) => {

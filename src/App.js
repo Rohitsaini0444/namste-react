@@ -14,26 +14,22 @@ const Grocery = lazy(() => import("./components/Grocery"));
 const AboutComponent = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
-  const [userDetails, setLoggedInUser] = useState({
-    loggedInUser: "Guest User"
-  });
+  const [userName, setLoggedInUser] = useState("Guest User");
 
   useEffect(() => {
     // Simulate fetching user data from an API
     setTimeout(() => {
-      setLoggedInUser({
-        loggedInUser: "Rohit Saini"
-      });
+      setLoggedInUser("Rohit Saini");
     }, 1000);
   }, []);
 
   return (
-    <div className="app">
-      <UserContext.Provider value={userDetails} updateUser={setLoggedInUser}>
+    <UserContext.Provider value={{loggedInUser: userName, updateUser: setLoggedInUser}}>
+      <div className="app">
         <HeaderComponent />
         <Outlet />
-      </UserContext.Provider>
-    </div>
+      </div>
+    </UserContext.Provider>
   );
 }
 
