@@ -1,17 +1,17 @@
 {
-  "name": "namste-react",
+  "name": "food-ordering-app",
   "version": "1.0.0",
-  "description": "this is a react application",
+  "description": "this is a react application for food ordering",
   "keywords": [
     "reacts"
   ],
-  "homepage": "https://github.com/Rohitsaini0444/namste-react#readme",
+  "homepage": "https://github.com/Rohitsaini0444/food-ordering-app#readme",
   "bugs": {
-    "url": "https://github.com/Rohitsaini0444/namste-react/issues"
+    "url": "https://github.com/Rohitsaini0444/food-ordering-app/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rohitsaini0444/namste-react.git"
+    "url": "git+https://github.com/Rohitsaini0444/food-ordering-app.git"
   },
   "license": "ISC",
   "author": "rohit saini",
